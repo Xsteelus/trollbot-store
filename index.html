@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trash Talk Store</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        body {
+            background-color: #1A1124;
+            color: #C19AFF;
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            text-align: center;
+            width: 100%;
+            max-width: 300px;
+        }
+        .product-card {
+            background-color: rgba(44, 31, 58, 0.9);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #7C10FF;
+        }
+        .price {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+        button {
+            background-color: #7C10FF;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            width: 100%;
+            cursor: pointer;
+        }
+        button:hover { background-color: #9B5EF5; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="product-card">
+            <h1>🎯 TrollBot v2.0</h1>
+            <p>Готовая программа для самых жестких токс-баттлов.</p>
+            <div class="price">⭐️ 100 Stars</div>
+            <button id="buyButton">Купить сейчас</button>
+        </div>
+    </div>
+
+    <script>
+        let tg = window.Telegram.WebApp;
+        tg.expand();
+
+        document.getElementById('buyButton').onclick = () => {
+            // Отправляем команду "купить" в твоего бота
+            fetch(`https://api.telegram.org/bot<ВАШ_ТОКЕН_БОТА>/sendMessage`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    chat_id: tg.initDataUnsafe.user.id,
+                    text: '/buy' // Или любой другой текст, который твой бот поймет как команду на старт оплаты
+                })
+            });
+            tg.close(); // Закрываем мини-приложение
+        };
+    </script>
+</body>
+</html>
