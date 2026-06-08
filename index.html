@@ -2,463 +2,106 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>KRONX STORE — официальный магазин</title>
-<!-- шрифты как на форуме -->
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Exo+2:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KRONX STORE</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <style>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-
-  :root {
-    --c0: #110D14;
-    --c1: #1A1124;
-    --c2: #2C1F3A;
-    --c3: #3A2A4A;
-    --accent: #7C10FF;
-    --accent-light: #9B5EF5;
-    --border: #5E3A7A;
-    --text-main: #E3D5FF;
-    --text-dim: #C19AFF;
-    --text-muted: #9B8EB3;
-  }
-
   body {
-    background: var(--c0);
+    background: #1A1124;
     font-family: 'Exo 2', sans-serif;
-    color: var(--text-main);
-    min-height: 100vh;
-    padding: 0 16px 32px;
-  }
-
-  /* градиентный фон */
-  body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, #110D14 0%, #1A1124 40%, #2C1F3A 100%);
-    z-index: -2;
-  }
-
-  /* сетка как на форуме */
-  .grid-overlay {
-    position: fixed;
-    inset: 0;
-    background-image: linear-gradient(rgba(124,16,255,0.05) 1px, transparent 1px),
-                      linear-gradient(90deg, rgba(124,16,255,0.05) 1px, transparent 1px);
-    background-size: 48px 48px;
-    pointer-events: none;
-    z-index: -1;
-  }
-
-  /* контейнер */
-  .store-container {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  /* header как в форуме */
-  .hdr {
+    color: #E3D5FF;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 16px 0;
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 24px;
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-
-  .logo {
-    font-family: 'Orbitron', monospace;
-    font-weight: 900;
-    font-size: 1.8rem;
-    letter-spacing: 4px;
-    background: linear-gradient(135deg, var(--text-dim), var(--accent));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    position: relative;
-  }
-
-  .logo::after {
-    content: '';
-    position: absolute;
-    right: -12px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 5px;
-    height: 5px;
-    background: var(--accent);
-    border-radius: 50%;
-    box-shadow: 0 0 8px var(--accent);
-    animation: pulse 1.2s infinite;
-  }
-
-  @keyframes pulse {
-    0%,100% { opacity: 1; }
-    50% { opacity: 0.3; }
-  }
-
-  .user-chip {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background: rgba(44,31,58,0.6);
-    border: 1px solid var(--border);
-    border-radius: 40px;
-    padding: 4px 12px 4px 6px;
-    cursor: pointer;
-  }
-
-  .user-chip-av {
-    width: 32px;
-    height: 32px;
-    background: var(--accent);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
     justify-content: center;
-    font-weight: bold;
-    font-family: 'Orbitron', monospace;
-    color: #050610;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
   }
-
-  /* карточка товара */
-  .product-card {
-    background: var(--c2);
-    border: 1px solid var(--border);
+  .card {
+    background: #2C1F3A;
+    border: 1px solid #5E3A7A;
     border-radius: 24px;
-    padding: 32px 24px;
+    padding: 32px;
     text-align: center;
-    margin: 32px 0;
-    backdrop-filter: blur(4px);
+    max-width: 400px;
+    width: 100%;
   }
-
-  .product-title {
+  h1 {
     font-family: 'Orbitron', monospace;
-    font-size: 2rem;
-    font-weight: 900;
-    background: linear-gradient(135deg, var(--text-dim), var(--accent));
+    background: linear-gradient(135deg, #C19AFF, #7C10FF);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
   }
-
   .price {
-    font-size: 2.5rem;
-    font-weight: bold;
+    font-size: 2rem;
+    color: #7C10FF;
     margin: 20px 0;
-    color: var(--accent);
-    font-family: 'Orbitron', monospace;
   }
-
-  .price span {
-    font-size: 1rem;
-    color: var(--text-muted);
-  }
-
-  .btn-buy {
-    background: var(--accent-gradient, linear-gradient(135deg, #7C10FF, #4A0A99));
+  button {
+    background: linear-gradient(135deg, #7C10FF, #4A0A99);
     border: none;
     border-radius: 40px;
-    padding: 14px 28px;
-    font-family: 'Orbitron', monospace;
-    font-weight: bold;
+    padding: 12px 24px;
     font-size: 1rem;
-    color: #050610;
-    cursor: pointer;
-    transition: all 0.2s;
-    width: 100%;
-    max-width: 280px;
-    margin: 0 auto;
-    display: block;
-  }
-
-  .btn-buy:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(124,16,255,0.4);
-  }
-
-  /* секция постов (как форум) */
-  .section-title {
-    font-family: 'Orbitron', monospace;
-    font-size: 0.8rem;
-    letter-spacing: 3px;
-    color: var(--text-muted);
-    margin: 32px 0 16px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .section-title::before {
-    content: '//';
-    color: var(--accent);
-  }
-
-  .post-card {
-    background: var(--c2);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 16px;
-    margin-bottom: 12px;
-    transition: 0.2s;
-    cursor: pointer;
-  }
-
-  .post-card:hover {
-    border-color: var(--accent);
-    background: var(--c3);
-  }
-
-  .post-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 8px;
-  }
-
-  .post-avatar {
-    width: 36px;
-    height: 36px;
-    background: var(--accent);
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-  }
-
-  .post-author {
-    font-weight: 600;
-    color: var(--text-dim);
-  }
-
-  .post-time {
-    font-size: 0.7rem;
-    color: var(--text-muted);
-    margin-left: auto;
-  }
-
-  .post-title {
-    font-family: 'Orbitron', monospace;
-    font-weight: 700;
-    margin: 8px 0;
-    color: var(--text-dim);
-  }
-
-  .post-excerpt {
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  /* форма связи */
-  .contact-form {
-    background: var(--c2);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 24px;
-    margin-top: 32px;
-  }
-
-  .form-input {
-    width: 100%;
-    background: rgba(44,31,58,0.6);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 12px 16px;
-    color: var(--text-main);
-    font-family: 'Exo 2', sans-serif;
-    margin-bottom: 16px;
-    outline: none;
-  }
-
-  .form-input:focus {
-    border-color: var(--accent);
-    box-shadow: 0 0 0 2px rgba(124,16,255,0.2);
-  }
-
-  .btn-secondary {
-    background: transparent;
-    border: 1px solid var(--accent);
-    border-radius: 40px;
-    padding: 10px 20px;
-    color: var(--accent);
-    font-family: 'Orbitron', monospace;
     font-weight: bold;
     cursor: pointer;
-    transition: 0.2s;
+    width: 100%;
   }
-
-  .btn-secondary:hover {
-    background: rgba(124,16,255,0.1);
-  }
-
   .toast {
     position: fixed;
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
-    background: var(--c3);
-    border: 1px solid var(--accent);
+    background: #3A2A4A;
+    border: 1px solid #7C10FF;
     border-radius: 40px;
-    padding: 10px 20px;
-    font-family: 'Share Tech Mono', monospace;
-    color: var(--text-dim);
-    z-index: 1000;
-    animation: fadeInUp 0.3s ease;
-  }
-
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateX(-50%) translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
-    }
-  }
-
-  .hide {
-    display: none;
+    padding: 8px 16px;
   }
 </style>
 </head>
 <body>
-<div class="grid-overlay"></div>
-<div class="store-container">
-  <div class="hdr">
-    <div class="logo">KRONX.STORE</div>
-    <div class="user-chip" id="userChip">
-      <div class="user-chip-av" id="userAv">EM</div>
-      <span id="userName">Гость</span>
-    </div>
-  </div>
-
-  <!-- карточка товара -->
-  <div class="product-card">
-    <div class="product-title">TROLLBOT v2.0</div>
-    <div class="price">⭐️ 100 <span>Telegram Stars</span></div>
-    <p style="margin-bottom: 24px; color: var(--text-muted);">Автоматический флудер для троллинка или просто спама.<br>Горячие клавиши, вкладки с шаблонами, защищённый авторский контент.</p>
-    <button class="btn-buy" id="buyButton">🌟 Купить сейчас</button>
-  </div>
-
-  <!-- лента форума (стилизованная) -->
-  <div class="section-title">Последние обсуждения</div>
-  <div id="postsContainer"></div>
-
-  <!-- форма обратной связи -->
-  <div class="contact-form">
-    <div class="section-title" style="margin-top: 0;">Обратная связь</div>
-    <input type="text" class="form-input" id="feedbackName" placeholder="Ваше имя">
-    <textarea class="form-input" id="feedbackMsg" rows="3" placeholder="Сообщение..."></textarea>
-    <button class="btn-secondary" id="sendFeedbackBtn">Отправить</button>
-  </div>
+<div class="card">
+  <h1>🔥 TROLLBOT v2.0</h1>
+  <div class="price">⭐️ 100 Stars</div>
+  <button id="buyBtn">Купить сейчас</button>
 </div>
 
 <script>
-  // Инициализация Telegram WebApp
   const tg = window.Telegram.WebApp;
   tg.expand();
-  tg.ready();
+  const userId = tg.initDataUnsafe?.user?.id;
+  const BOT_TOKEN = "8962296029:AAFZbAKsFubZF9szhaeZvB1xU5eupgS0ZYA";
 
-  // Получаем данные пользователя (если есть)
-  const user = tg.initDataUnsafe?.user;
-  let userName = user?.first_name || (user?.username ? '@'+user.username : 'Гость');
-  let userId = user?.id || null;
-
-  // Обновляем интерфейс
-  function updateUserUI() {
-    const avElem = document.getElementById('userAv');
-    const nameElem = document.getElementById('userName');
-    if (nameElem) nameElem.innerText = userName;
-    if (avElem) {
-      let initials = userName.charAt(0).toUpperCase();
-      if (userName.length > 1 && userName !== 'Гость') initials += userName.charAt(1).toUpperCase();
-      else initials = 'G';
-      avElem.innerText = initials;
-    }
-  }
-  updateUserUI();
-
-  // Функция показа уведомления
-  function showToast(text) {
-    const existing = document.querySelector('.toast');
-    if (existing) existing.remove();
-    const toast = document.createElement('div');
-    toast.className = 'toast';
-    toast.innerText = text;
-    document.body.appendChild(toast);
-    setTimeout(() => toast.remove(), 3000);
+  function showToast(msg) {
+    const t = document.createElement('div');
+    t.className = 'toast';
+    t.innerText = msg;
+    document.body.appendChild(t);
+    setTimeout(() => t.remove(), 3000);
   }
 
-  // Отправка счёта на оплату (бот будет обрабатывать)
-  function buyProduct() {
+  document.getElementById('buyBtn').onclick = () => {
     if (!userId) {
-      showToast('❌ Не удалось определить пользователя. Попробуйте позже.');
+      showToast('❌ Не удалось определить пользователя');
       return;
     }
-    // Отправляем команду боту через API Telegram (бот сам создаст инвойс)
-    // Твой бот должен уметь обрабатывать /buy и вызывать send_invoice
-    fetch(`https://api.telegram.org/bot<8962296029:AAFZbAKsFubZF9szhaeZvB1xU5eupgS0ZYA>/sendMessage`, {
+    fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        chat_id: userId,
-        text: '/buy'
-      })
-    }).then(() => {
-      showToast('✅ Счёт отправлен в чат с ботом!');
-      tg.close();
-    }).catch(() => {
-      showToast('⚠️ Ошибка. Напишите боту команду /buy вручную.');
-    });
-  }
-
-  document.getElementById('buyButton').addEventListener('click', buyProduct);
-
-  // Отправка обратной связи (можно связать с ботом или просто уведомление)
-  document.getElementById('sendFeedbackBtn').addEventListener('click', () => {
-    const name = document.getElementById('feedbackName').value.trim();
-    const msg = document.getElementById('feedbackMsg').value.trim();
-    if (!msg) {
-      showToast('Напишите сообщение');
-      return;
-    }
-    // Отправить в Telegram боту (простой способ)
-    if (userId) {
-      fetch(`https://api.telegram.org/bot<8962296029:AAFZbAKsFubZF9szhaeZvB1xU5eupgS0ZYA>/sendMessage`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          chat_id: userId,
-          text: `📩 Обратная связь от ${name || 'анонима'}:\n${msg}`
-        })
-      }).then(() => {
-        showToast('Спасибо, сообщение отправлено!');
-        document.getElementById('feedbackName').value = '';
-        document.getElementById('feedbackMsg').value = '';
-      }).catch(() => showToast('Ошибка отправки, попробуйте позже'));
-    } else {
-      showToast('Не удалось отправить. Напишите боту напрямую.');
-    }
-  });
-
-  // Обработка параметров URL (если нужно открыть конкретный пост — для будущего)
-  // Здесь просто placeholder
+      body: JSON.stringify({ chat_id: userId, text: '/buy' })
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.ok) {
+        showToast('✅ Счёт отправлен в чат с ботом!');
+        tg.close();
+      } else {
+        showToast('⚠️ Ошибка, попробуйте позже');
+      }
+    })
+    .catch(() => showToast('⚠️ Ошибка соединения'));
+  };
 </script>
 </body>
 </html>
