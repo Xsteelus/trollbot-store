@@ -6,13 +6,8 @@
 <title>KRONX STORE — TrollBot v2.0</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <style>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-
-  body {
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
     background: radial-gradient(circle at 10% 20%, #1A1124, #0C0818);
     font-family: 'Exo 2', system-ui, -apple-system, 'Segoe UI', sans-serif;
     color: #E3D5FF;
@@ -23,8 +18,7 @@
     align-items: center;
     padding: 20px;
   }
-
-  .card {
+  .card{
     max-width: 420px;
     width: 100%;
     background: rgba(44, 31, 58, 0.65);
@@ -33,10 +27,8 @@
     border-radius: 48px;
     padding: 32px 24px 40px;
     box-shadow: 0 25px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(124, 16, 255, 0.1) inset;
-    transition: all 0.2s;
   }
-
-  .badge {
+  .badge{
     display: inline-block;
     background: linear-gradient(135deg, #7C10FF, #A855F7);
     padding: 6px 16px;
@@ -48,8 +40,7 @@
     margin-bottom: 24px;
     font-family: monospace;
   }
-
-  h1 {
+  h1{
     font-size: 2.4rem;
     font-weight: 800;
     background: linear-gradient(135deg, #FFF, #C19AFF, #7C10FF);
@@ -59,8 +50,7 @@
     margin-bottom: 12px;
     letter-spacing: -0.5px;
   }
-
-  .version {
+  .version{
     font-size: 0.8rem;
     color: #9B8EB3;
     margin-bottom: 24px;
@@ -69,8 +59,7 @@
     gap: 8px;
     justify-content: center;
   }
-
-  .features {
+  .features{
     text-align: left;
     background: rgba(0, 0, 0, 0.3);
     border-radius: 28px;
@@ -78,8 +67,7 @@
     margin: 20px 0;
     border: 1px solid rgba(124, 16, 255, 0.2);
   }
-
-  .features li {
+  .features li{
     list-style: none;
     margin-bottom: 12px;
     display: flex;
@@ -87,26 +75,22 @@
     gap: 10px;
     font-size: 0.9rem;
   }
-
-  .features li::before {
+  .features li::before{
     content: "⚡";
     color: #7C10FF;
   }
-
-  .price {
+  .price{
     font-size: 2.8rem;
     font-weight: 800;
     color: #C19AFF;
     margin: 16px 0;
   }
-
-  .price small {
+  .price small{
     font-size: 1rem;
     font-weight: 400;
     color: #9B8EB3;
   }
-
-  .buy-btn {
+  .buy-btn{
     background: linear-gradient(135deg, #7C10FF, #4A0A99);
     border: none;
     border-radius: 60px;
@@ -120,19 +104,16 @@
     box-shadow: 0 8px 20px rgba(124, 16, 255, 0.3);
     margin: 16px 0 8px;
   }
-
-  .buy-btn:active {
+  .buy-btn:active{
     transform: scale(0.97);
   }
-
-  .footer-note {
+  .footer-note{
     font-size: 0.7rem;
     color: #6A5A8A;
     text-align: center;
     margin-top: 24px;
   }
-
-  .toast {
+  .toast{
     position: fixed;
     bottom: 30px;
     left: 50%;
@@ -147,10 +128,9 @@
     z-index: 1000;
     animation: slideUp 0.2s ease;
   }
-
-  @keyframes slideUp {
-    from { opacity: 0; transform: translateX(-50%) translateY(20px); }
-    to { opacity: 1; transform: translateX(-50%) translateY(0); }
+  @keyframes slideUp{
+    from{opacity:0;transform:translateX(-50%) translateY(20px);}
+    to{opacity:1;transform:translateX(-50%) translateY(0);}
   }
 </style>
 </head>
@@ -194,11 +174,11 @@
       return;
     }
 
-    // Параметры инвойса (те же, что в боте)
+    // Параметры инвойса — такие же, как в обработчике /buy бота
     const invoiceParams = {
       chat_id: userId,
-      title: "🔥 TrollBot v2.0 — Тролль-бот",
-      description: "Полная версия программы с GUI, шаблонами, горячими клавишами. Мгновенная выдача файла после оплаты.",
+      title: "🔥 TrollBot – флудер для токс-баттлов",
+      description: "Готовая программа с GUI, горячими клавишами, шаблонами.", // ← ТОЧНО КАК В БОТЕ
       payload: `trollbot_${userId}_${Date.now()}`,
       provider_token: "",
       currency: "XTR",
@@ -215,7 +195,7 @@
       const data = await response.json();
       if (data.ok) {
         showToast('✅ Счёт отправлен! Проверьте чат с ботом.', false);
-        tg.close(); // закроем веб-приложение, чтобы пользователь увидел инвойс
+        tg.close();
       } else {
         console.error(data);
         showToast(`⚠️ Ошибка: ${data.description || 'попробуйте позже'}`, true);
