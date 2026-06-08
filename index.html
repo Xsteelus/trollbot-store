@@ -352,7 +352,7 @@
   <div class="product-card">
     <div class="product-title">TROLLBOT v2.0</div>
     <div class="price">⭐️ 100 <span>Telegram Stars</span></div>
-    <p style="margin-bottom: 24px; color: var(--text-muted);">Автоматический флудер для самых жёстких токс-баттлов.<br>Горячие клавиши, вкладки с шаблонами, защищённый авторский контент.</p>
+    <p style="margin-bottom: 24px; color: var(--text-muted);">Автоматический флудер для троллинка или просто спама.<br>Горячие клавиши, вкладки с шаблонами, защищённый авторский контент.</p>
     <button class="btn-buy" id="buyButton">🌟 Купить сейчас</button>
   </div>
 
@@ -413,7 +413,7 @@
     }
     // Отправляем команду боту через API Telegram (бот сам создаст инвойс)
     // Твой бот должен уметь обрабатывать /buy и вызывать send_invoice
-    fetch(`https://api.telegram.org/bot<ВАШ_ТОКЕН_БОТА>/sendMessage`, {
+    fetch(`https://api.telegram.org/bot<8962296029:AAFZbAKsFubZF9szhaeZvB1xU5eupgS0ZYA>/sendMessage`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -430,30 +430,6 @@
 
   document.getElementById('buyButton').addEventListener('click', buyProduct);
 
-  // Генерация демо-постов в стиле форума
-  const demoPosts = [
-    { author: 'Rebecca', avatar: 'RB', time: '2 часа назад', title: 'Как настроить прицел в CS2?', excerpt: 'Никак не могу подобрать чувствительность, поделитесь опытом...' },
-    { author: 'Guy991', avatar: 'G9', time: '5 часов назад', title: 'Новый патч Dota 2 — мета изменилась', excerpt: 'Обсуждение новых героев и багов после обновления.' },
-    { author: 'VortexPlay', avatar: 'VX', time: 'вчера', title: 'Лучшая база в Rust для соло', excerpt: 'Проверенная схема 2х1 с ложными стенами.' },
-    { author: 'NexStream', avatar: 'NX', time: 'вчера', title: 'Гайд по стримингу: от 0 до 1000 зрителей', excerpt: 'Полный разбор оборудования, OBS и монетизации.' }
-  ];
-
-  function renderPosts() {
-    const container = document.getElementById('postsContainer');
-    container.innerHTML = demoPosts.map(p => `
-      <div class="post-card" onclick="showToast('Открыть полный пост — будет в будущем обновлении')">
-        <div class="post-header">
-          <div class="post-avatar">${p.avatar}</div>
-          <div class="post-author">${p.author}</div>
-          <div class="post-time">${p.time}</div>
-        </div>
-        <div class="post-title">${p.title}</div>
-        <div class="post-excerpt">${p.excerpt}</div>
-      </div>
-    `).join('');
-  }
-  renderPosts();
-
   // Отправка обратной связи (можно связать с ботом или просто уведомление)
   document.getElementById('sendFeedbackBtn').addEventListener('click', () => {
     const name = document.getElementById('feedbackName').value.trim();
@@ -464,7 +440,7 @@
     }
     // Отправить в Telegram боту (простой способ)
     if (userId) {
-      fetch(`https://api.telegram.org/bot<ВАШ_ТОКЕН_БОТА>/sendMessage`, {
+      fetch(`https://api.telegram.org/bot<8962296029:AAFZbAKsFubZF9szhaeZvB1xU5eupgS0ZYA>/sendMessage`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
