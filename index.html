@@ -146,7 +146,7 @@
     <li>Градиентная тёмная тема, тени, закругления</li>
     <li>Работает везде: Discord, Telegram, игры</li>
   </ul>
-  <div class="price">⭐️ 100 <small>Telegram Stars</small></div>
+  <div class="price">⭐️ 5 <small>Telegram Stars</small></div>
   <button class="buy-btn" id="buyBtn">🌟 Купить сейчас</button>
   <div class="footer-note">Оплата через Telegram Stars — мгновенная выдача файла</div>
 </div>
@@ -174,27 +174,19 @@
       return;
     }
 
-    // Параметры инвойса — такие же, как в обработчике /buy бота
-    const invoiceParams = {
-      chat_id: userId,
-      title: "🔥 TrollBot – флудер для токс-баттлов",
-      description: "Готовая программа с GUI, горячими клавишами, шаблонами.", // ← ТОЧНО КАК В БОТЕ
-      payload: `trollbot_${userId}_${Date.now()}`,
-      provider_token: "",
-      currency: "XTR",
-      prices: [{ label: "TrollBot v2.0", amount: 100 }],
-      start_parameter: "trollbot_payment"
-    };
-
+    // Просто отправляем команду /buy боту (без лишних сообщений)
     try {
-      const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendInvoice`, {
+      const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(invoiceParams)
+        body: JSON.stringify({
+          chat_id: userId,
+          text: '/buy'
+        })
       });
       const data = await response.json();
       if (data.ok) {
-        showToast('✅ Счёт отправлен! Проверьте чат с ботом.', false);
+        showToast('✅ Команда отправлена! Бот пришлёт счёт.', false);
         tg.close();
       } else {
         console.error(data);
